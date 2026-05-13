@@ -16,6 +16,11 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '17'
+        distribution: 'temurin'
+        chache: maven
+    - name: Build With maven
+      run: mvn compile
+    
   security-check:
     runs-on: ubuntu-latest
 
