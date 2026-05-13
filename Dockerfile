@@ -1,20 +1,13 @@
-# Use the official Node.js 18 image based on Alpine Linux (lightweight)
-FROM node:18-alpine
+FROM eclipse-temurin:17-jdk-alpine
+    
+EXPOSE 8080
 
-# Set the working directory inside the container
-WORKDIR /usr/src/app
+RUN ls 
 
-# Copy package.json and package-lock.json to install dependencies
-COPY package*.json ./
+ENV APP_HOME /usr/src/app
 
-# Install Node.js dependencies
-RUN npm install
+COPY app/*.jar $APP_HOME/app.jar
 
-# Copy the rest of the application code
-COPY . .
+WORKDIR $APP_HOME
 
-# Expose port 3000 so the app can be accessed
-EXPOSE 3000
-
-# Command to run the app
-CMD ["npm", "start"]
+CMD ["java", "-jar", "app.jar"]
